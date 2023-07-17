@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Pos\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,10 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/store/profile', 'storeProfile')->name('store.profile');
     Route::get('/change/password', 'changePassword')->name('change.password');
     Route::post('/update/password', 'updatePassword')->name('update.password');
+});
+
+Route::controller(SupplierController::class)->group(function () {
+    Route::get('/supplier/all', 'supplierAll')->name('supplier.all');
 });
 
 require __DIR__ . '/auth.php';

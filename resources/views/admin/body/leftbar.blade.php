@@ -21,7 +21,7 @@
                         <span>Manage Suppliers</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="email-inbox.html">All Suppliers</a></li>
+                        <li><a href="{{ route('supplier.all') }}">All Suppliers</a></li>
                     </ul>
                 </li>
 
