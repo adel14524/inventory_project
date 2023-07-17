@@ -43,6 +43,8 @@ Route::controller(AdminController::class)->group(function () {
 
 Route::controller(SupplierController::class)->group(function () {
     Route::get('/supplier/all', 'supplierAll')->name('supplier.all');
+    Route::get('/supplier/add', 'supplierAdd')->name('supplier.add');
+    Route::post('/supplier/store', 'supplierStore')->name('supplier.store');
 });
 
 require __DIR__ . '/auth.php';

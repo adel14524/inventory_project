@@ -17,7 +17,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="" class="btn btn-dark waves-effect waves-light" style="float:right;">Add Supplier </a>
+                            <a href="{{ route('supplier.add') }}" class="btn btn-dark waves-effect waves-light" style="float:right;">Add Supplier </a>
                             <br><br>
                             <h4 class="card-title">Supplier All Data</h4>
 
