@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Pos\CustomerController;
 use App\Http\Controllers\Pos\SupplierController;
 
 /*
@@ -31,7 +32,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-//Admin All Route
+// Admin All Route
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
     Route::get('/admin/profile', 'profile')->name('admin.profile');
@@ -41,6 +42,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/update/password', 'updatePassword')->name('update.password');
 });
 
+// Supplier Route
 Route::controller(SupplierController::class)->group(function () {
     Route::get('/supplier/all', 'supplierAll')->name('supplier.all');
     Route::get('/supplier/add', 'supplierAdd')->name('supplier.add');
@@ -48,6 +50,11 @@ Route::controller(SupplierController::class)->group(function () {
     Route::get('/supplier/edit/{id}', 'supplierEdit')->name('supplier.edit');
     Route::post('/supplier/update', 'supplierUpdate')->name('supplier.update');
     Route::get('/supplier/delete/{id}', 'supplierDelete')->name('supplier.delete');
+});
+
+// Customer Route
+Route::controller(CustomerController::class)->group(function () {
+    Route::get('/customer/all', 'customerAll')->name('customer.all');
 });
 
 require __DIR__ . '/auth.php';
