@@ -18,7 +18,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Customer</a><br><br>
+                            <a href="" class="btn btn-dark waves-effect waves-light" style="float:right;">Add Customer</a><br><br>
 
                             <h4 class="card-title">Customer All Data</h4>
 
@@ -35,19 +35,26 @@
                                 </thead>
 
                                 <tbody>
-                                    @foreach($customers as $key => $item)
+                                    @if (!empty($customer))
+                                        @foreach($customers as $key => $item)
+                                            <tr>
+                                                <td> {{ $key+1}} </td>
+                                                <td> {{ $item->name }} </td>
+                                                <td> <img src="{{ asset( $item->customer_image ) }}" style="width:60px; height:50px"> </td>
+                                                <td> {{ $item->email }} </td>
+                                                <td> {{ $item->address }} </td>
+                                                <td>
+                                                    <a href="" class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
+                                                    <a href="" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
                                         <tr>
-                                            <td> {{ $key+1}} </td>
-                                            <td> {{ $item->name }} </td>
-                                            <td> <img src="{{ asset( $item->customer_image ) }}" style="width:60px; height:50px"> </td>
-                                            <td> {{ $item->email }} </td>
-                                            <td> {{ $item->address }} </td>
-                                            <td>
-                                                <a href="" class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
-                                                <a href="" class="btn btn-danger sm" title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
-                                            </td>
+                                            <td colspan="6" class="text-center">No data found</td>
                                         </tr>
-                                    @endforeach
+                                    @endif
+
                                 </tbody>
                             </table>
                         </div>

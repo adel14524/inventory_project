@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Pos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Suppliers;
+use App\Models\Supplier;
 use Auth;
 use Illuminate\Support\Carbon;
 
@@ -14,7 +14,7 @@ class SupplierController extends Controller
     public function supplierAll()
     {
         // $suppliers = Supplier::all();
-        $suppliers = Suppliers::latest()->get();
+        $suppliers = Supplier::latest()->get();
         return view('admin.supplier.supplier-all', compact('suppliers'));
     }
 
@@ -27,7 +27,7 @@ class SupplierController extends Controller
     // Store Added Supplier in Database
     public function supplierStore(Request $request)
     {
-        Suppliers::insert([
+        Supplier::insert([
             'name' => $request->name,
             'mobile_no' => $request->mobile_no,
             'email' => $request->email,
@@ -48,7 +48,7 @@ class SupplierController extends Controller
     // Redirect to Update Supplier page With Supplier ID
     public function supplierEdit($id)
     {
-        $supplier = Suppliers::findOrFail($id);
+        $supplier = Supplier::findOrFail($id);
 
         return view('admin.supplier.supplier-edit', compact('supplier'));
     }
@@ -58,7 +58,7 @@ class SupplierController extends Controller
     {
         $sullier_id = $request->id;
 
-        Suppliers::findOrFail($sullier_id)->update([
+        Supplier::findOrFail($sullier_id)->update([
             'name' => $request->name,
             'mobile_no' => $request->mobile_no,
             'email' => $request->email,
@@ -78,7 +78,7 @@ class SupplierController extends Controller
     // Delete Supplier
     public function supplierDelete($id)
     {
-        Suppliers::findOrFail($id)->delete();
+        Supplier::findOrFail($id)->delete();
 
         $notification = array(
             'message' => 'Supplier Deleted Successfully',
