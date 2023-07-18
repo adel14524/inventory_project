@@ -45,6 +45,9 @@ Route::controller(SupplierController::class)->group(function () {
     Route::get('/supplier/all', 'supplierAll')->name('supplier.all');
     Route::get('/supplier/add', 'supplierAdd')->name('supplier.add');
     Route::post('/supplier/store', 'supplierStore')->name('supplier.store');
+    Route::get('/supplier/edit/{id}', 'supplierEdit')->name('supplier.edit');
+    Route::post('/supplier/update', 'supplierUpdate')->name('supplier.update');
+    Route::get('/supplier/delete/{id}', 'supplierDelete')->name('supplier.delete');
 });
 
 require __DIR__ . '/auth.php';
