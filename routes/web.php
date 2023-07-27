@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Pos\CustomerController;
 use App\Http\Controllers\Pos\SupplierController;
+use App\Http\Controllers\Pos\UnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,13 @@ Route::controller(CustomerController::class)->group(function () {
     Route::get('/customer/edit/{id}', 'customerEdit')->name('customer.edit');
     Route::post('/customer/update', 'customerUpdate')->name('customer.update');
     Route::get('/customer/delete/{id}', 'customerDelete')->name('customer.delete');
+});
+
+// Unit Routes
+Route::controller(UnitController::class)->group(function () {
+    Route::get('/unit/all', 'unitAll')->name('unit.all');
+    Route::get('/unit/add', 'unitAdd')->name('unit.add');
+    Route::post('/unit/store', 'unitStore')->name('unit.store');
 });
 
 require __DIR__ . '/auth.php';
