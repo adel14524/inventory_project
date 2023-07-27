@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Edit Supplier Page</h4><br><br>
+                            <h4 class="card-title"><b>Edit Supplier</b></h4><br><br>
 
                             <form method="post" action="{{ route('supplier.update') }}" id="myForm" >
                                 @csrf
@@ -18,7 +18,7 @@
                                 <input type="hidden" name="id" value="{{ $supplier->id }}">
 
                                 <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">Supplier Name </label>
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Supplier Name</label>
                                     <div class="form-group col-sm-10">
                                         <input name="name" class="form-control" value="{{ $supplier->name }}" type="text"    >
                                     </div>
