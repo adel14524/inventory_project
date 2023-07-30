@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0"><b>Customer</b></h4>
+                        <h4 class="mb-sm-0"><b>Category</b></h4>
                     </div>
                 </div>
             </div>
@@ -18,19 +18,18 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('customer.add') }}" class="btn btn-dark waves-effect waves-light" style="float:right;">Add Customer</a><br><br><br>
 
-                            <h4 class="card-title"><b>All Customer</b></h4><br>
+                            <a href="{{ route('category.add') }}" class="btn btn-dark waves-effect waves-light" style="float:right;">Add Category </a> <br> <br> <br>
 
-                            <table id="customerTable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <h4 class="card-title">All Category</h4> <br>
+
+
+                            <table id="categoryTable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th>Sl</th>
+                                        <th width="5%">Sl</th>
                                         <th>Name</th>
-                                        <th width="12%">Customer Image </th>
-                                        <th width="20%">Email</th>
-                                        <th>Address</th>
-                                        <th>Action</th>
+                                        <th width="10%">Action</th>
                                     </tr>
                                 </thead>
 

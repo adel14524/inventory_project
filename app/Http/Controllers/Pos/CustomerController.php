@@ -8,14 +8,25 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Intervention\Image\ImageManagerStatic as Image;
+use Storage;
 
 class CustomerController extends Controller
 {
     // View all customer
     public function customerAll()
     {
+        return view('admin.customer.customer-all');
+    }
+
+    public function getCustomer()
+    {
         $customers = Customer::latest()->get();
-        return view('admin.customer.customer-all', compact('customers'));
+
+        foreach ($customers as $key => $cust) {
+            $cust->image_path = url('storage/upload/customer/'.$cust->customer_image);
+        }
+
+        return response()->json(['data' => $customers]);
     }
 
     public function customerAdd()
@@ -26,16 +37,14 @@ class CustomerController extends Controller
     public function customerStore(Request $request){
 
         $image = $request->file('customer_image');
-        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); // 343434.png
-        Image::make($image)->resize(200,200)->save('upload/customer/'.$name_gen);
-        $save_url = 'upload/customer/'.$name_gen;
-
+        $name_gen = $request->name.hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); // 343434.png
+        $image->storeAs( '', $name_gen, 'customerImage');
         Customer::insert([
             'name' => $request->name,
             'mobile_no' => $request->mobile_no,
             'email' => $request->email,
             'address' => $request->address,
-            'customer_image' => $save_url ,
+            'customer_image' => $name_gen ,
             'created_by' => Auth::user()->id,
             'created_at' => Carbon::now(),
 

@@ -29,6 +29,8 @@
 
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     </head>
 
     <body data-topbar="dark">

@@ -56,6 +56,17 @@ return [
             'throw' => false,
         ],
 
+        'customerImage' => [
+            'driver' => 'local',
+            'root' => public_path().'/storage/upload/customer',
+        ],
+
+        'profilePicture' => [
+            'driver' => 'local',
+            'root' => public_path().'/storage/upload/admin_images',
+        ],
+
+
     ],
 
     /*

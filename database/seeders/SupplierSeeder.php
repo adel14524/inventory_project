@@ -21,8 +21,6 @@ class SupplierSeeder extends Seeder
                 'mobile_no' => $faker->phoneNumber,
                 'email' => $faker->email,
                 'address' => $faker->address,
-                'updated_by' => 1,
-                'updated_at' => Carbon::now(),
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
 

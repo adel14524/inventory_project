@@ -13,9 +13,14 @@ class SupplierController extends Controller
     // View all Supplier
     public function supplierAll()
     {
+        return view('admin.supplier.supplier-all');
+    }
+
+    public function getSupplier()
+    {
         // $suppliers = Supplier::all();
         $suppliers = Supplier::latest()->get();
-        return view('admin.supplier.supplier-all', compact('suppliers'));
+        return response()->json(['data' => $suppliers]);
     }
 
     // Redirect to Add Supplier Page

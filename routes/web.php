@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Pos\CustomerController;
 use App\Http\Controllers\Pos\SupplierController;
 use App\Http\Controllers\Pos\UnitController;
+use App\Http\Controllers\Pos\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::controller(AdminController::class)->group(function () {
 // Supplier Route
 Route::controller(SupplierController::class)->group(function () {
     Route::get('/supplier/all', 'supplierAll')->name('supplier.all');
+    Route::get('/supplier/ajax', 'getSupplier')->name('supplier.ajax');
     Route::get('/supplier/add', 'supplierAdd')->name('supplier.add');
     Route::post('/supplier/store', 'supplierStore')->name('supplier.store');
     Route::get('/supplier/edit/{id}', 'supplierEdit')->name('supplier.edit');
@@ -56,6 +58,7 @@ Route::controller(SupplierController::class)->group(function () {
 // Customer Route
 Route::controller(CustomerController::class)->group(function () {
     Route::get('/customer/all', 'customerAll')->name('customer.all');
+    Route::get('/customer/ajax', 'getCustomer')->name('customer.ajax');
     Route::get('/customer/add', 'customerAdd')->name('customer.add');
     Route::post('/customer/store', 'customerStore')->name('customer.store');
     Route::get('/customer/edit/{id}', 'customerEdit')->name('customer.edit');
@@ -66,8 +69,23 @@ Route::controller(CustomerController::class)->group(function () {
 // Unit Routes
 Route::controller(UnitController::class)->group(function () {
     Route::get('/unit/all', 'unitAll')->name('unit.all');
+    Route::get('/unit/ajax', 'getAjax')->name('unit.ajax');
     Route::get('/unit/add', 'unitAdd')->name('unit.add');
     Route::post('/unit/store', 'unitStore')->name('unit.store');
+    Route::get('/unit/edit/{id}', 'unitEdit')->name('unit.edit');
+    Route::post('/unit/update', 'unitUpdate')->name('unit.update');
+    Route::get('/unit/delete/{id}', 'unitDelete')->name('unit.delete');
+});
+
+//Category Routes
+Route::controller(CategoryController::class)->group(function() {
+    Route::get('/category/all', 'categoryAll')->name('category.all');
+    Route::get('/category/ajax', 'getCategory')->name('category.ajax');
+    Route::get('/category/add', 'categoryAdd')->name('category.add');
+    Route::post('/category/store', 'categoryStore')->name('category.store');
+    Route::get('/category/edit/{id}', 'categoryEdit')->name('category.edit');
+    Route::post('/category/update', 'categoryUpdate')->name('category.update');
+    Route::get('/category/delete/{id}', 'categoryDelete')->name('category.delete');
 });
 
 require __DIR__ . '/auth.php';

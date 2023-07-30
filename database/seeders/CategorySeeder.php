@@ -4,11 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Customer;
+use App\Models\Category;
 use Illuminate\Support\Carbon;
 use Faker\Generator as Faker;
 
-class CustomerSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,12 +16,8 @@ class CustomerSeeder extends Seeder
     public function run(Faker $faker): void
     {
         for ($i=0; $i < 10; $i++) {
-            Customer::insert([
+            Category::insert([
                 'name' => $faker->name,
-                'mobile_no' => $faker->phoneNumber,
-                'email' => $faker->email,
-                'address' => $faker->address,
-                'customer_image' => $faker->image('storage/app/public/upload/customer',640,480, null, false),
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ]);
