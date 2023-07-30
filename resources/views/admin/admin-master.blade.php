@@ -17,6 +17,8 @@
         <!-- DataTables -->
         <link href="{{ asset('admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
+        <link href="{{ asset('admin/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+
         <!-- Responsive datatable examples -->
         <link href="{{ asset('admin/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
 
@@ -123,6 +125,8 @@
 
         <!-- Datatable init js -->
         <script src="{{ asset('admin/assets/js/pages/datatables.init.js') }}"></script>
+
+        <script src="{{ asset('admin/assets/libs/select2/js/select2.min.js') }}"></script>
 
         <script src="{{ asset('admin/assets/js/validate.min.js') }}"></script>
 

@@ -10,3 +10,4 @@ import './unit';
 import './customers';
 import './supplier';
 import './category';
+import './product';

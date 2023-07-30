@@ -7,6 +7,7 @@ use App\Http\Controllers\Pos\CustomerController;
 use App\Http\Controllers\Pos\SupplierController;
 use App\Http\Controllers\Pos\UnitController;
 use App\Http\Controllers\Pos\CategoryController;
+use App\Http\Controllers\Pos\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,7 +78,7 @@ Route::controller(UnitController::class)->group(function () {
     Route::get('/unit/delete/{id}', 'unitDelete')->name('unit.delete');
 });
 
-//Category Routes
+// Category Routes
 Route::controller(CategoryController::class)->group(function() {
     Route::get('/category/all', 'categoryAll')->name('category.all');
     Route::get('/category/ajax', 'getCategory')->name('category.ajax');
@@ -86,6 +87,14 @@ Route::controller(CategoryController::class)->group(function() {
     Route::get('/category/edit/{id}', 'categoryEdit')->name('category.edit');
     Route::post('/category/update', 'categoryUpdate')->name('category.update');
     Route::get('/category/delete/{id}', 'categoryDelete')->name('category.delete');
+});
+
+// Product Routes
+Route::controller(ProductController::class)->group(function() {
+    Route::get('/product/all', 'ProductAll')->name('product.all');
+    Route::get('/product/ajax', 'getProduct')->name('product.ajax');
+    Route::get('/product/add', 'productAdd')->name('product.add');
+    Route::post('/product/store', 'productStore')->name('product.store');
 });
 
 require __DIR__ . '/auth.php';
