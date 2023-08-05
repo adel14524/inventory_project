@@ -95,6 +95,8 @@ Route::controller(ProductController::class)->group(function() {
     Route::get('/product/ajax', 'getProduct')->name('product.ajax');
     Route::get('/product/add', 'productAdd')->name('product.add');
     Route::post('/product/store', 'productStore')->name('product.store');
+    Route::get('/product/edit/{id}', 'ProductEdit')->name('product.edit');
+    Route::post('/product/update', 'ProductUpdate')->name('product.update');
 });
 
 require __DIR__ . '/auth.php';

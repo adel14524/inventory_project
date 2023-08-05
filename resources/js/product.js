@@ -14,6 +14,15 @@ $(document).ready(function (){
                 name: 'name'
             },
             {
+                data: 'product_image',
+                name: 'product_image',
+                render: function ( data, type,row ) {
+                    var html =
+                    '<img src="'+ row.image_path +'" style="width:60px; height:50px">';
+                    return html;
+                },
+            },
+            {
                 data: 'supplier_name',
                 name: 'supplier_name'
             },

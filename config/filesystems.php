@@ -66,7 +66,10 @@ return [
             'root' => public_path().'/storage/upload/admin_images',
         ],
 
-
+        'productImage' => [
+            'driver' => 'local',
+            'root' => public_path().'/storage/upload/product',
+        ],
     ],
 
     /*

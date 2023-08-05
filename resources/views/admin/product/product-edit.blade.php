@@ -10,27 +10,29 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title">Add Product</h4><br><br>
+                            <h4 class="card-title">Edit Product</h4><br><br>
 
-                            <form method="post" action="{{ route('product.store') }}" id="myForm" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('product.update') }}" id="myForm" >
                                 @csrf
+
+                                <input type="hidden" name="id" value="{{ $product->id }}">
 
                                 <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Product Name </label>
                                     <div class="form-group col-sm-10">
-                                        <input name="name" class="form-control" type="text">
+                                        <input name="name" value="{{ $product->name }}" class="form-control" type="text"    >
                                     </div>
                                 </div>
                                 <!-- end row -->
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Supplier Name</label>
-                                    <div class="col-sm-10">
-                                        <select name="supplier_id" id="supplier_id" class="form-select select2" style="width: 100%" aria-label="Default select example">
-                                            <option selected=""></option>
 
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Supplier Name </label>
+                                    <div class="col-sm-10">
+                                        <select name="supplier_id" id="supplier_id" class="form-select select2" aria-label="Default select example">
+                                            <option selected=""></option>
                                             @foreach($supplier as $supp)
-                                                <option value="{{ $supp->id }}">{{ $supp->name }}</option>
+                                                <option value="{{ $supp->id }}" {{ $supp->id == $product->supplier_id ? 'selected' : '' }} >{{ $supp->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -42,48 +44,30 @@
                                     <div class="col-sm-10">
                                         <select name="unit_id" id="unit_id" class="form-select select2" aria-label="Default select example">
                                             <option selected=""></option>
-
                                             @foreach($unit as $uni)
-                                                <option value="{{ $uni->id }}">{{ $uni->name }}</option>
+                                                <option value="{{ $uni->id }}" {{ $uni->id == $product->unit_id ? 'selected' : '' }} >{{ $uni->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <!-- end row -->
 
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Category Name</label>
 
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Category Name </label>
                                     <div class="col-sm-10">
                                         <select name="category_id" id="category_id" class="form-select select2" aria-label="Default select example">
                                             <option selected=""></option>
-
                                             @foreach($category as $cat)
-                                                <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                                <option value="{{ $cat->id }}" {{ $cat->id == $product->category_id ? 'selected' : '' }}>{{ $cat->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <!-- end row -->
 
-                                <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">Product Image </label>
-                                    <div class="form-group col-sm-10">
-                                        <input name="product_image" class="form-control" type="file"  id="image">
-                                    </div>
-                                </div>
-                                <!-- end row -->
-
-                                <div class="row mb-3">
-                                    <label for="example-text-input" class="col-sm-2 col-form-label">  </label>
-                                    <div class="col-sm-10">
-                                        <img id="showImage" class="rounded avatar-lg" src="{{  url('upload/no_image.jpg') }}" alt="Card image cap">
-                                    </div>
-                                </div>
-                                <!-- end row -->
-                                <br>
-
-                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Add Product">
+                                <input type="submit" class="btn btn-info waves-effect waves-light" value="Update Product">
                             </form>
                         </div>
                     </div>
@@ -96,17 +80,14 @@
         $(document).ready(function (){
             $('#supplier_id').select2({
                 width: 'resolve',
-                placeholder: 'Please Select Supplier',
             });
 
             $('#unit_id').select2({
                 width: 'resolve',
-                placeholder: 'Please Select Unit',
             });
 
             $('#category_id').select2({
                 width: 'resolve',
-                placeholder: 'Please Select Category',
             });
 
             $('#myForm').validate({
@@ -151,18 +132,6 @@
                 },
             });
         });
-    </script>
 
-    <script type="text/javascript">
-
-        $(document).ready(function(){
-            $('#image').change(function(e){
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#showImage').attr('src',e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0']);
-            });
-        });
     </script>
 @endsection

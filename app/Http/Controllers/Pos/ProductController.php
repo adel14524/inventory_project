@@ -9,7 +9,9 @@ use App\Models\Category;
 use App\Models\Supplier;
 use App\Models\Unit;
 use Auth;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Carbon;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -24,6 +26,7 @@ class ProductController extends Controller
             $product->supplier_name = $product->supplier->name;
             $product->unit_name = $product->unit->name;
             $product->category_name = $product->category->name;
+            $product->image_path = url('storage/upload/product/'.$product->product_image);
         }
 
         return response()->json(['data' => $products]);
@@ -39,12 +42,18 @@ class ProductController extends Controller
 
     public function productStore(Request $request){
 
+
+        $image = $request->file('product_image');
+        $name_gen = $request->name.hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); // 343434.png
+
+        $image->storeAs( '', $name_gen, 'productImage');
+
         Product::insert([
             'name' => $request->name,
             'supplier_id' => $request->supplier_id,
             'unit_id' => $request->unit_id,
             'category_id' => $request->category_id,
-            'product_image' => $request->product_image,
+            'product_image' => $name_gen,
             'quantity' => '0',
             'created_by' => Auth::user()->id,
             'created_at' => Carbon::now(),
@@ -71,12 +80,13 @@ class ProductController extends Controller
 
         $product_id = $request->id;
 
-         Product::findOrFail($product_id)->update([
+        Product::findOrFail($product_id)->update([
 
             'name' => $request->name,
             'supplier_id' => $request->supplier_id,
             'unit_id' => $request->unit_id,
             'category_id' => $request->category_id,
+            'product_image' => $request->product_image,
             'updated_by' => Auth::user()->id,
             'updated_at' => Carbon::now(),
         ]);
