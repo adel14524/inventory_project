@@ -12,7 +12,7 @@
 
                             <h4 class="card-title">Edit Product</h4><br><br>
 
-                            <form method="post" action="{{ route('product.update') }}" id="myForm" >
+                            <form method="post" action="{{ route('product.update') }}" id="myForm" enctype="multipart/form-data">
                                 @csrf
 
                                 <input type="hidden" name="id" value="{{ $product->id }}">
@@ -52,8 +52,6 @@
                                 </div>
                                 <!-- end row -->
 
-
-
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Category Name </label>
                                     <div class="col-sm-10">
@@ -67,6 +65,30 @@
                                 </div>
                                 <!-- end row -->
 
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Quantity </label>
+                                    <div class="form-group col-sm-10">
+                                        <input id="qty" type="text" value="{{ $product->quantity }}" name="qty">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Product Image </label>
+                                    <div class="form-group col-sm-10">
+                                        <input name="product_image" class="form-control" type="file"  id="image">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">  </label>
+                                    <div class="col-sm-10">
+                                        <img id="showImage" class="rounded avatar-lg" src="{{ asset('storage/upload/product/'.$product->product_image) }}" alt="Card image cap">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+                                <br>
                                 <input type="submit" class="btn btn-info waves-effect waves-light" value="Update Product">
                             </form>
                         </div>
@@ -88,6 +110,9 @@
 
             $('#category_id').select2({
                 width: 'resolve',
+            });
+
+            $('#qty').TouchSpin({
             });
 
             $('#myForm').validate({
@@ -133,5 +158,18 @@
             });
         });
 
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('#image').change(function(e){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#showImage').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
     </script>
 @endsection

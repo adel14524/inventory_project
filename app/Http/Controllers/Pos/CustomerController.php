@@ -39,6 +39,7 @@ class CustomerController extends Controller
         $image = $request->file('customer_image');
         $name_gen = $request->name.hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); // 343434.png
         $image->storeAs( '', $name_gen, 'customerImage');
+        
         Customer::insert([
             'name' => $request->name,
             'mobile_no' => $request->mobile_no,
@@ -74,15 +75,14 @@ class CustomerController extends Controller
 
             $image = $request->file('customer_image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); // 343434.png
-            Image::make($image)->resize(200,200)->save('upload/customer/'.$name_gen);
-            $save_url = 'upload/customer/'.$name_gen;
+            $image->storeAs( '', $name_gen, 'customerImage');
 
             Customer::findOrFail($customer_id)->update([
                 'name' => $request->name,
                 'mobile_no' => $request->mobile_no,
                 'email' => $request->email,
                 'address' => $request->address,
-                'customer_image' => $save_url ,
+                'customer_image' => $name_gen,
                 'updated_by' => Auth::user()->id,
                 'updated_at' => Carbon::now(),
 

@@ -67,6 +67,14 @@
                                 <!-- end row -->
 
                                 <div class="row mb-3">
+                                    <label for="example-text-input" class="col-sm-2 col-form-label">Quantity </label>
+                                    <div class="form-group col-sm-10">
+                                        <input id="qty" type="text" value="" name="qty">
+                                    </div>
+                                </div>
+                                <!-- end row -->
+
+                                <div class="row mb-3">
                                     <label for="example-text-input" class="col-sm-2 col-form-label">Product Image </label>
                                     <div class="form-group col-sm-10">
                                         <input name="product_image" class="form-control" type="file"  id="image">
@@ -107,6 +115,10 @@
             $('#category_id').select2({
                 width: 'resolve',
                 placeholder: 'Please Select Category',
+            });
+
+            $('#qty').TouchSpin({
+                initval: 40
             });
 
             $('#myForm').validate({

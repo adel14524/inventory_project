@@ -27,10 +27,11 @@
                                     <tr>
                                         <th>Sl</th>
                                         <th>Name</th>
+                                        <th>Product Image</th>
                                         <th>Supplier Name </th>
                                         <th>Unit</th>
                                         <th>Category</th>
-                                        <th>Product Image</th>
+                                        <th>Quantity</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

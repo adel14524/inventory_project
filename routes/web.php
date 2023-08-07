@@ -8,6 +8,8 @@ use App\Http\Controllers\Pos\SupplierController;
 use App\Http\Controllers\Pos\UnitController;
 use App\Http\Controllers\Pos\CategoryController;
 use App\Http\Controllers\Pos\ProductController;
+use App\Http\Controllers\Pos\PurchaseController;
+use App\Http\Controllers\Pos\DefaultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +99,18 @@ Route::controller(ProductController::class)->group(function() {
     Route::post('/product/store', 'productStore')->name('product.store');
     Route::get('/product/edit/{id}', 'ProductEdit')->name('product.edit');
     Route::post('/product/update', 'ProductUpdate')->name('product.update');
+    Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
+});
+
+Route::controller(PurchaseController::class)->group(function() {
+    Route::get('/purchase/all', 'purchaseAll')->name('purchase.all');
+    Route::get('/purchase/ajax', 'getPurchase')->name('purchase.ajax');
+    Route::get('/purchase/add', 'purchaseAdd')->name('purchase.add');
+});
+
+Route::controller(DefaultController::class)->group(function() {
+    Route::get('/get-category', 'GetCategories')->name('get-category');
+    Route::get('/get-product', 'GetProducts')->name('get-product');
 });
 
 require __DIR__ . '/auth.php';

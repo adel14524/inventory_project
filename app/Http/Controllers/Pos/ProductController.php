@@ -29,6 +29,8 @@ class ProductController extends Controller
             $product->image_path = url('storage/upload/product/'.$product->product_image);
         }
 
+        // dd($products);
+
         return response()->json(['data' => $products]);
     }
 
@@ -54,7 +56,7 @@ class ProductController extends Controller
             'unit_id' => $request->unit_id,
             'category_id' => $request->category_id,
             'product_image' => $name_gen,
-            'quantity' => '0',
+            'quantity' => $request->qty,
             'created_by' => Auth::user()->id,
             'created_at' => Carbon::now(),
         ]);
@@ -80,22 +82,61 @@ class ProductController extends Controller
 
         $product_id = $request->id;
 
-        Product::findOrFail($product_id)->update([
+        if ($request->file('product_image')) {
+            $image = $request->file('product_image');
+            $name_gen = $request->name.hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); // 343434.png
+            $image->storeAs( '', $name_gen, 'productImage');
 
-            'name' => $request->name,
-            'supplier_id' => $request->supplier_id,
-            'unit_id' => $request->unit_id,
-            'category_id' => $request->category_id,
-            'product_image' => $request->product_image,
-            'updated_by' => Auth::user()->id,
-            'updated_at' => Carbon::now(),
-        ]);
+            Product::findOrFail($product_id)->update([
 
-        $notification = array(
-            'message' => 'Product Updated Successfully',
+                'name' => $request->name,
+                'supplier_id' => $request->supplier_id,
+                'unit_id' => $request->unit_id,
+                'category_id' => $request->category_id,
+                'product_image' => $name_gen,
+                'quantity' => $request->qty,
+                'updated_by' => Auth::user()->id,
+                'updated_at' => Carbon::now(),
+            ]);
+
+            $notification = array(
+                'message' => 'Product Updated Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('product.all')->with($notification);
+        }
+        else {
+            Product::findOrFail($product_id)->update([
+
+                'name' => $request->name,
+                'supplier_id' => $request->supplier_id,
+                'unit_id' => $request->unit_id,
+                'category_id' => $request->category_id,
+                'quantity' => $request->qty,
+                'updated_by' => Auth::user()->id,
+                'updated_at' => Carbon::now(),
+            ]);
+
+            $notification = array(
+                'message' => 'Product Updated Successfully',
+                'alert-type' => 'success'
+            );
+
+            return redirect()->route('product.all')->with($notification);
+        }
+
+    }
+
+    public function ProductDelete($id){
+
+        Product::findOrFail($id)->delete();
+            $notification = array(
+            'message' => 'Product Deleted Successfully',
             'alert-type' => 'success'
         );
 
-        return redirect()->route('product.all')->with($notification);
-    }
+        return redirect()->back()->with($notification);
+
+    } // End Method
 }

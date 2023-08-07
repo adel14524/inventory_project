@@ -35,6 +35,10 @@ $(document).ready(function (){
                 name: 'category_name'
             },
             {
+                data: 'quantity',
+                name: 'quantity'
+            },
+            {
                 data: 'id',
                 name: 'id',
                 render: function ( data, type, row ) {
